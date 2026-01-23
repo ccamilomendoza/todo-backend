@@ -1,12 +1,13 @@
+/** biome-ignore-all lint/style/noNonNullAssertion: The DATABASE_URL must be defined */
+
 import "dotenv/config";
 import { defineConfig } from "drizzle-kit";
 
 export default defineConfig({
   out: "./drizzle",
   schema: "./src/modules/shared/infrastructure/db/*",
-  dialect: "sqlite",
+  dialect: "postgresql",
   dbCredentials: {
-    // biome-ignore lint/style/noNonNullAssertion: The DB_FILE_NAME variable should be define
-    url: process.env.DB_FILE_NAME!,
+    url: process.env.DATABASE_URL!,
   },
 });

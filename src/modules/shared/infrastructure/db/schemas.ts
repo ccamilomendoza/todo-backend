@@ -1,12 +1,9 @@
-import { sql } from "drizzle-orm";
-import { int, sqliteTable, text } from "drizzle-orm/sqlite-core";
+import { pgTable, timestamp, uuid, varchar } from "drizzle-orm/pg-core";
 
-export const todoTable = sqliteTable("users_table", {
-  createdAt: text("create_at")
-    .notNull()
-    .default(sql`(current_timestamp)`),
-  description: text("description").notNull(),
-  id: int("id").primaryKey({ autoIncrement: true }),
-  status: text("status").notNull(),
-  title: text("title").notNull(),
+export const todoTable = pgTable("todo", {
+  createAt: timestamp("create_at").notNull().defaultNow(),
+  description: varchar("description", { length: 255 }).notNull(),
+  id: uuid().primaryKey(),
+  status: varchar("status", { enum: ["done", "progress", "todo"] }).notNull(),
+  title: varchar("title", { length: 255 }).notNull(),
 });

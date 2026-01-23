@@ -1,3 +1,4 @@
+import type { ErrorResponseDto } from "@/modules/shared/infrastructure/dtos/response.dto";
 import {
   generateGetTodosUseCase,
   generatePostTodoUseCase,
@@ -6,36 +7,38 @@ import type { Todo } from "@/modules/todo/domain/entities/todo.entity";
 import { getTodosPostgresRepository } from "@/modules/todo/infrastructure/db/todo.db";
 import { postTodoSqlLiteRepository } from "@/modules/todo/infrastructure/repositories/todo.repository";
 import { todoSchema } from "@/modules/todo/infrastructure/schemas/todo.schema";
-import type { RequestHandler } from "express";
+import type { RouteHandler } from "fastify";
 
 const getTodosUseCase = generateGetTodosUseCase({
   getTodosRepository: getTodosPostgresRepository,
 });
 
-export const getTodosController: RequestHandler<unknown, Array<Todo>> = async (
-  _req,
-  res
-) => {
-  const todos = await getTodosUseCase();
+export const getTodosController: RouteHandler<{
+  Reply: Array<Todo> | ErrorResponseDto;
+}> = async (_request, response) => {
+  try {
+    const todos = await getTodosUseCase();
 
-  res.status(200).json(todos);
+    return response.status(200).send(todos);
+  } catch (_error) {
+    return response.status(500).send({ message: "Server Error" });
+  }
 };
 
 const postTodoUseCase = generatePostTodoUseCase({
   postTodoRepository: postTodoSqlLiteRepository,
 });
 
-export const postTodoController: RequestHandler<
-  unknown,
-  { message: string; status: number },
-  Todo
-> = async (req, res) => {
-  const requestBody = req.body;
+export const postTodoController: RouteHandler<{
+  Body: Todo;
+  Reply: ErrorResponseDto;
+}> = async (request, response) => {
+  const requestBody = request.body;
 
   const validate = todoSchema.safeParse(requestBody);
 
   if (!validate.success) {
-    res.status(422).json({ message: "Wrong Todo Format", status: 422 });
+    response.status(422).send({ message: "Wrong Todo Format" });
 
     return;
   }
@@ -43,6 +46,6 @@ export const postTodoController: RequestHandler<
   try {
     await postTodoUseCase(validate.data);
   } catch (_error) {
-    res.status(500).json({ message: "Server Error", status: 500 });
+    response.status(500).send({ message: "Server Error" });
   }
 };

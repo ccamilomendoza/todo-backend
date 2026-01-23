@@ -1,8 +1,19 @@
-import express from "express";
-import { todoRouter } from "./modules/todo/infrastructure/router/todo.router";
+import Fastify from "fastify";
+import { todoRoutes } from "./modules/todo/infrastructure/router/todo.router";
 
-const app = express();
+const fastify = Fastify({
+  logger: true,
+});
 
-const API_NAME = "/architecture/todo";
+fastify.register(todoRoutes);
 
-app.use(API_NAME, todoRouter);
+const start = async () => {
+  try {
+    await fastify.listen({ port: 3000 });
+  } catch (err) {
+    fastify.log.error(err);
+    process.exit(1);
+  }
+};
+
+start();

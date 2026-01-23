@@ -2,9 +2,9 @@ import {
   getTodosController,
   postTodoController,
 } from "@/modules/todo/infrastructure/controllers/todo.controller";
-import { Router } from "express";
+import type { FastifyPluginAsync } from "fastify";
 
-export const todoRouter = Router();
-
-todoRouter.get("/", getTodosController);
-todoRouter.post("/", postTodoController);
+export const todoRoutes: FastifyPluginAsync = async (fastify) => {
+  fastify.get("/todo", getTodosController);
+  fastify.post("/todo", postTodoController);
+};

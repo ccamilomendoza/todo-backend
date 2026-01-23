@@ -1,5 +1,9 @@
-import "dotenv/config";
-import { drizzle } from "drizzle-orm/libsql";
+import { neon } from "@neondatabase/serverless";
+import { config } from "dotenv";
+import { drizzle } from "drizzle-orm/neon-http";
 
-// biome-ignore lint/style/noNonNullAssertion: The env variable should be defined
-export const db = drizzle({ connection: { url: process.env.DB_FILE_NAME! } });
+config({ path: ".env" }); // or .env.local
+
+// biome-ignore lint/style/noNonNullAssertion: The DATABASE_URL must be defined
+const sql = neon(process.env.DATABASE_URL!);
+export const db = drizzle({ client: sql });
