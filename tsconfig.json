@@ -5,7 +5,9 @@
     "outDir": "./dist",
     "rootDir": "./",
     "paths": {
-      "@/*": ["./*"]
+      "@/*": ["./*"],
+      "user/*": ["./modules/user/*"],
+      "shared/*": ["./modules/shared/*"]
     }
   },
   "include": ["**/*.ts"],

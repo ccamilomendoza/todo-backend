@@ -1,0 +1,1 @@
+ALTER TABLE "user" RENAME COLUMN "create_at" TO "created_at";

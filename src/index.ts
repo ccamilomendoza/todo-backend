@@ -1,11 +1,11 @@
 import Fastify from "fastify";
-import { todoRoutes } from "./modules/todo/infrastructure/router/todo.router";
+import { userRoutes } from "./modules/user/infrastructure/router/user.router";
 
 const fastify = Fastify({
   logger: true,
 });
 
-fastify.register(todoRoutes);
+fastify.register(userRoutes);
 
 const start = async () => {
   try {
