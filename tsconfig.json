@@ -9,7 +9,7 @@
       "shared/*": ["./modules/shared/*"]
     },
     "target": "ESNext",
-    "module": "node20"
+    "module": "nodenext"
   },
   "include": ["**/*.ts"],
   "exclude": ["dist"]
