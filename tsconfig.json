@@ -1,16 +1,15 @@
 {
   "extends": "@tsconfig/node24/tsconfig.json",
   "compilerOptions": {
-    "baseUrl": "./src",
+    "baseUrl": ".",
     "outDir": "./dist",
-    "rootDir": "./",
+    "rootDir": ".",
     "paths": {
-      "user/*": ["./modules/user/*"],
-      "shared/*": ["./modules/shared/*"]
-    },
-    "target": "ESNext",
-    "module": "nodenext"
+      "@/*": ["src/*"],
+      "user/*": ["src/modules/user/*"],
+      "shared/*": ["src/modules/shared/*"]
+    }
   },
-  "include": ["**/*.ts"],
-  "exclude": ["dist"]
+  "include": ["src/**/*", "api/**/*"],
+  "exclude": ["dist", "node_modules"]
 }
