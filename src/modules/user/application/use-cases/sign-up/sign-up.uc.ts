@@ -1,37 +1,35 @@
+import { fail, ok } from "shared/domain/rules/result/result.rules";
+import type { Result } from "shared/domain/types/result.type";
 import type {
   GetUserByUsernameRepository,
   SignUpUserRepository,
 } from "user/domain/repositories/user.repository";
+import { userAlreadyExists } from "user/domain/rules/errors/errors.rules";
+import type { HashService } from "user/domain/services/hash.service";
+import type { UserAlreadyExistsError } from "user/domain/types/user.types";
 
 interface SignUpUserUseCase {
   getUserByUsernameRepository: GetUserByUsernameRepository;
+  hashService: HashService;
   signUpUserRepository: SignUpUserRepository;
 }
 
 export const signUpUserUseCase =
-  ({ getUserByUsernameRepository, signUpUserRepository }: SignUpUserUseCase) =>
+  ({
+    getUserByUsernameRepository,
+    hashService,
+    signUpUserRepository,
+  }: SignUpUserUseCase) =>
   async (
     userData: Parameters<SignUpUserRepository>[0],
-  ): Promise<{ description: string; status: "error" | "success" }> => {
-    try {
-      const user = await getUserByUsernameRepository(userData.username);
+  ): Promise<Result<void, UserAlreadyExistsError>> => {
+    const user = await getUserByUsernameRepository(userData.username);
 
-      if (user)
-        return {
-          description: "Application Error",
-          status: "error",
-        };
+    if (user) return fail(userAlreadyExists(userData.username));
 
-      await signUpUserRepository(userData);
+    const hashedPassword = await hashService(userData.password);
 
-      return {
-        description: "",
-        status: "success",
-      };
-    } catch (_error) {
-      return {
-        description: "Application Error",
-        status: "error",
-      };
-    }
+    await signUpUserRepository({ ...userData, password: hashedPassword });
+
+    return ok(undefined);
   };

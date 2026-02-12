@@ -22,7 +22,7 @@ export const taskTable = pgTable("task", {
   description: varchar("description", { length: 255 }),
   dueDate: timestamp("due_date"),
   estimatedHours: numeric("estimated_hours"),
-  id: uuid("id").primaryKey(),
+  id: uuid("id").defaultRandom().primaryKey(),
   priority: varchar("priority", {
     enum: ["critical", "high", "low", "medium"],
     length: 255,

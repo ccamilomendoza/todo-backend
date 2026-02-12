@@ -12,7 +12,7 @@ export const columnTable = pgTable("column", {
     .notNull()
     .references(() => boardTable.id),
   createAt: timestamp("create_at").notNull().defaultNow(),
-  id: uuid("id").primaryKey(),
+  id: uuid("id").defaultRandom().primaryKey(),
   name: varchar("name", { length: 100 }).notNull(),
   position: numeric().notNull(),
   updatedAt: timestamp("updated_at").notNull(),

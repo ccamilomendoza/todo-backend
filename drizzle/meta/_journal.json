@@ -15,6 +15,20 @@
       "when": 1770086554974,
       "tag": "0001_second",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1770740039579,
+      "tag": "0002_third",
+      "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "7",
+      "when": 1770741367289,
+      "tag": "0003_fourth",
+      "breakpoints": true
     }
   ]
 }

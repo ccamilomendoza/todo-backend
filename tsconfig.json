@@ -5,10 +5,11 @@
     "outDir": "./dist",
     "rootDir": "./",
     "paths": {
-      "@/*": ["./*"],
       "user/*": ["./modules/user/*"],
       "shared/*": ["./modules/shared/*"]
-    }
+    },
+    "target": "ESNext",
+    "module": "node20"
   },
   "include": ["**/*.ts"],
   "exclude": ["dist"]
