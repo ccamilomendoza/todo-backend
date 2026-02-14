@@ -1,10 +1,10 @@
 import { eq, sql } from "drizzle-orm";
-import { db } from "shared/infrastructure/clients/drizzle.client";
-import { userTable } from "shared/infrastructure/orm/user.orm";
+import { db } from "../../../shared/infrastructure/clients/drizzle.client";
+import { userTable } from "../../../shared/infrastructure/orm/user.orm";
 import type {
   GetUserByUsernameRepository,
   SignUpUserRepository,
-} from "user/domain/repositories/user.repository";
+} from "../../domain/repositories/user.repository";
 
 export const getUserByUsernameRepository: GetUserByUsernameRepository = async (
   username,

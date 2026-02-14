@@ -1,5 +1,5 @@
 import { createInsertSchema } from "drizzle-zod";
-import { userTable } from "shared/infrastructure/orm/user.orm";
+import { userTable } from "../../../shared/infrastructure/orm/user.orm";
 
 export const signUpUserSchema = createInsertSchema(userTable);
 

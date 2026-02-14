@@ -2,7 +2,7 @@ import jwt from "jsonwebtoken";
 import type {
   GenerateTokenService,
   VerifyTokenService,
-} from "user/domain/services/token.service";
+} from "../../domain/services/token.service";
 
 export const generateTokenService: GenerateTokenService = (
   payload: Record<string, unknown>,

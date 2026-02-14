@@ -1,4 +1,4 @@
-import type { UserEntity } from "user/domain/entities/user.entity";
+import type { UserEntity } from "../entities/user.entity";
 
 export type SignUpUserRepository = (
   user: Omit<UserEntity, "createdAt" | "updatedAt">,

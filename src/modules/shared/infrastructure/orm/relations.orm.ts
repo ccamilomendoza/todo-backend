@@ -1,9 +1,9 @@
 import { relations } from "drizzle-orm";
-import { boardTable } from "shared/infrastructure/orm/board.orm";
-import { columnTable } from "shared/infrastructure/orm/column.orm";
-import { projectTable } from "shared/infrastructure/orm/project.orm";
-import { taskTable } from "shared/infrastructure/orm/task.orm";
-import { userTable } from "shared/infrastructure/orm/user.orm";
+import { boardTable } from "./board.orm";
+import { columnTable } from "./column.orm";
+import { projectTable } from "./project.orm";
+import { taskTable } from "./task.orm";
+import { userTable } from "./user.orm";
 
 export const boardRelations = relations(boardTable, ({ many, one }) => ({
   columns: many(columnTable),

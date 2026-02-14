@@ -1,12 +1,12 @@
 import type { RouteHandler } from "fastify";
-import { signUpUserUseCase } from "user/application/use-cases/sign-up/sign-up.uc";
+import type { z } from "zod/v4";
+import { signUpUserUseCase } from "../../../application/use-cases/sign-up/sign-up.uc";
 import {
   getUserByUsernameRepository,
   signUpUserRepository,
-} from "user/infrastructure/data-base/user.db";
-import { signUpUserSchema } from "user/infrastructure/schemas/user.schema";
-import { hashService } from "user/infrastructure/services/bcrypt.service";
-import type { z } from "zod/v4";
+} from "../../data-base/user.db";
+import { signUpUserSchema } from "../../schemas/user.schema";
+import { hashService } from "../../services/bcrypt.service";
 
 export const signUpController: RouteHandler<{
   Body: z.infer<typeof signUpUserSchema>;

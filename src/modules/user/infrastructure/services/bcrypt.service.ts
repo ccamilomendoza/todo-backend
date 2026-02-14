@@ -2,7 +2,7 @@ import { compare, hash } from "bcrypt";
 import type {
   CompareHashService,
   HashService,
-} from "user/domain/services/hash.service";
+} from "../../domain/services/hash.service";
 
 export const hashService: HashService = async (
   value: string,

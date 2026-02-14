@@ -1,12 +1,12 @@
-import { fail, ok } from "shared/domain/rules/result/result.rules";
-import type { Result } from "shared/domain/types/result.type";
+import type { UserAlreadyExistsError } from "user/domain/types/user.types";
+import { fail, ok } from "../../../../shared/domain/rules/result/result.rules";
+import type { Result } from "../../../../shared/domain/types/result.type";
 import type {
   GetUserByUsernameRepository,
   SignUpUserRepository,
-} from "user/domain/repositories/user.repository";
-import { userAlreadyExists } from "user/domain/rules/errors/errors.rules";
-import type { HashService } from "user/domain/services/hash.service";
-import type { UserAlreadyExistsError } from "user/domain/types/user.types";
+} from "../../../domain/repositories/user.repository";
+import { userAlreadyExists } from "../../../domain/rules/errors/errors.rules";
+import type { HashService } from "../../../domain/services/hash.service";
 
 interface SignUpUserUseCase {
   getUserByUsernameRepository: GetUserByUsernameRepository;

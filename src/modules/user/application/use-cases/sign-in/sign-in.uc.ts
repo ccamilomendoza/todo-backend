@@ -1,16 +1,16 @@
-import { fail, ok } from "shared/domain/rules/result/result.rules";
-import type { Result } from "shared/domain/types/result.type";
-import type { GetUserByUsernameRepository } from "user/domain/repositories/user.repository";
+import { fail, ok } from "../../../../shared/domain/rules/result/result.rules";
+import type { Result } from "../../../../shared/domain/types/result.type";
+import type { GetUserByUsernameRepository } from "../../../domain/repositories/user.repository";
 import {
   userNotFound,
   wrongPassword,
-} from "user/domain/rules/errors/errors.rules";
-import type { CompareHashService } from "user/domain/services/hash.service";
-import type { GenerateTokenService } from "user/domain/services/token.service";
+} from "../../../domain/rules/errors/errors.rules";
+import type { CompareHashService } from "../../../domain/services/hash.service";
+import type { GenerateTokenService } from "../../../domain/services/token.service";
 import type {
   UserNotFoundError,
   WrongPasswordError,
-} from "user/domain/types/user.types";
+} from "../../../domain/types/user.types";
 
 interface SignInUserUseCaseDeps {
   compareHashService: CompareHashService;

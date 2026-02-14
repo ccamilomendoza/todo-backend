@@ -2,7 +2,7 @@ import type {
   UserAlreadyExistsError,
   UserNotFoundError,
   WrongPasswordError,
-} from "user/domain/types/user.types";
+} from "../../types/user.types";
 
 export const userAlreadyExists = (
   username: string,
