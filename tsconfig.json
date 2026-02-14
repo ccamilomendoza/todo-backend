@@ -1,15 +1,30 @@
 {
-  "extends": "@tsconfig/node24/tsconfig.json",
   "compilerOptions": {
-    "baseUrl": ".",
-    "outDir": "./dist",
+    /* Entorno Base (Vercel Node.js 18/20/22) */
+    "target": "ES2022",
+    "lib": ["ES2022"],
+
+    /* Módulos y Resolución */
+    "module": "CommonJS",
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+
+    /* Interoperabilidad (Crucial para Vercel) */
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+
+    /* Transpiladores ultrarrápidos (SWC/esbuild) */
+    "isolatedModules": true,
+
+    /* Chequeo de Tipos (Estricto) */
+    "strict": true,
+    "forceConsistentCasingInFileNames": true,
+    "skipLibCheck": true,
+
+    /* Estructura de Salida (Opcional, útil para chequeos locales) */
     "rootDir": ".",
-    "paths": {
-      "@/*": ["src/*"],
-      "user/*": ["src/modules/user/*"],
-      "shared/*": ["src/modules/shared/*"]
-    }
+    "outDir": "./dist"
   },
-  "include": ["src/**/*", "api/**/*"],
-  "exclude": ["dist", "node_modules"]
+  "include": ["src/**/*"],
+  "exclude": ["node_modules", "dist", ".vercel"]
 }

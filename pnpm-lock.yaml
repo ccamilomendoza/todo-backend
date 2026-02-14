@@ -42,9 +42,6 @@ importers:
       '@biomejs/biome':
         specifier: 2.3.11
         version: 2.3.11
-      '@tsconfig/node24':
-        specifier: ^24.0.3
-        version: 24.0.3
       '@types/bcrypt':
         specifier: ^6.0.0
         version: 6.0.0
@@ -683,9 +680,6 @@ packages:
 
   '@pinojs/redact@0.4.0':
     resolution: {integrity: sha512-k2ENnmBugE/rzQfEcdWHcCY+/FM3VLzH9cYEsbdsoqrvzAKRhUZeRNhAZvB8OitQJ1TBed3yqWtdjzS6wJKBwg==}
-
-  '@tsconfig/node24@24.0.3':
-    resolution: {integrity: sha512-vcERKtKQKHgzt/vfS3Gjasd8SUI2a0WZXpgJURdJsMySpS5+ctgbPfuLj2z/W+w4lAfTWxoN4upKfu2WzIRYnw==}
 
   '@types/bcrypt@6.0.0':
     resolution: {integrity: sha512-/oJGukuH3D2+D+3H4JWLaAsJ/ji86dhRidzZ/Od7H/i8g+aCmvkeCc6Ni/f9uxGLSQVCRZkX2/lqEFG2BvWtlQ==}
@@ -1722,8 +1716,6 @@ snapshots:
       fastq: 1.20.1
 
   '@pinojs/redact@0.4.0': {}
-
-  '@tsconfig/node24@24.0.3': {}
 
   '@types/bcrypt@6.0.0':
     dependencies:
