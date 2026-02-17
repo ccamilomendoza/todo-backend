@@ -5,7 +5,7 @@ import {
   getUserByUsernameRepository,
   signUpUserRepository,
 } from "../../data-base/user.db";
-import { signUpUserSchema } from "../../schemas/user.schema";
+import type { signUpUserSchema } from "../../schemas/user.schema";
 import { hashService } from "../../services/bcrypt.service";
 
 export const signUpController: RouteHandler<{
@@ -14,20 +14,12 @@ export const signUpController: RouteHandler<{
 }> = async (request, response) => {
   const userData = request.body;
 
-  const validate = signUpUserSchema.safeParse(userData);
-
-  if (!validate.success) {
-    response.code(400).send({ message: "Wrong Body Format" });
-
-    return;
-  }
-
   try {
     const result = await signUpUserUseCase({
       getUserByUsernameRepository,
       hashService,
       signUpUserRepository,
-    })(validate.data);
+    })(userData);
 
     if (!result.success) {
       response.code(409).send({ message: result.error.message });
