@@ -10,7 +10,11 @@ import type { GenerateTokenService } from "../../../domain/services/token.servic
 import type {
   UserNotFoundError,
   WrongPasswordError,
-} from "../../../domain/types/user.types";
+} from "../../../domain/types/errors.types";
+import type {
+  AuthResponsePayload,
+  UserCredentialsPayload,
+} from "../../../domain/types/payloads.types";
 
 interface SignInUserUseCaseDeps {
   compareHashService: CompareHashService;
@@ -24,11 +28,10 @@ export const signInUserUseCase =
     generateTokenService,
     getUserByUsernameRepository,
   }: SignInUserUseCaseDeps) =>
-  async (credentials: {
-    username: string;
-    password: string;
-  }): Promise<
-    Result<{ token: string }, UserNotFoundError | WrongPasswordError>
+  async (
+    credentials: UserCredentialsPayload,
+  ): Promise<
+    Result<AuthResponsePayload, UserNotFoundError | WrongPasswordError>
   > => {
     const user = await getUserByUsernameRepository(credentials.username);
 

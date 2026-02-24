@@ -15,7 +15,7 @@ export const userTable = pgTable(
     email: varchar("email", { length: 255 }).notNull().unique(),
     firstName: varchar("first_name", { length: 255 }).notNull(),
     id: uuid("id").defaultRandom().primaryKey(),
-    isActive: boolean("is_active").notNull(),
+    isActive: boolean("is_active").notNull().default(true),
     lastName: varchar("last_name", { length: 255 }).notNull(),
     password: varchar("password", { length: 255 }).notNull(),
     updatedAt: timestamp("updated_at")

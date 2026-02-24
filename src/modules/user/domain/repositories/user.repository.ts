@@ -1,15 +1,24 @@
 import type { UserEntity } from "../entities/user.entity";
+import type {
+  CreateUserPayload,
+  UserCredentialsPayload,
+} from "../types/payloads.types";
 
-export type SignUpUserRepository = (
-  user: Omit<UserEntity, "createdAt" | "updatedAt">,
-) => Promise<void>;
+interface CheckUserExistsRepositoryArgs {
+  username: string;
+  email: string;
+}
 
-export type GetUserRepository = (id: string) => Promise<UserEntity>;
+export type CheckUserExistsRepository = (
+  args: CheckUserExistsRepositoryArgs,
+) => Promise<UserEntity | undefined>;
+
+export type SignUpUserRepository = (user: CreateUserPayload) => Promise<void>;
 
 export type GetUserByUsernameRepository = (
   username: string,
 ) => Promise<UserEntity | undefined>;
 
 export type SignInUserRepository = (
-  user: Pick<UserEntity, "password" | "username">,
+  user: UserCredentialsPayload,
 ) => Promise<UserEntity>;

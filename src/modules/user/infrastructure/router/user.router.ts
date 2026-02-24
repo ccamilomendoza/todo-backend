@@ -1,6 +1,7 @@
 import type { FastifyPluginAsync } from "fastify";
 import type { ZodTypeProvider } from "fastify-type-provider-zod";
 import { z } from "zod";
+import { validationErrorSchema } from "../../../shared/infrastructure/schemas/validation.schema";
 import { signInController } from "../controllers/sign-in/sign-in.controller";
 import { signUpController } from "../controllers/sign-up/sign-up.controller";
 import { signInUserSchema, signUpUserSchema } from "../schemas/user.schema";
@@ -14,18 +15,17 @@ export const userRoutes: FastifyPluginAsync = async (fastify) => {
       schema: {
         tags: ["User"],
         summary: "Registrar un nuevo usuario",
-        description: "Crea un usuario en el sistema",
+        description:
+          "Crea un usuario en el sistema validando que el username y el email sean únicos.",
         body: signUpUserSchema,
         response: {
           201: z
             .object({ message: z.string() })
             .describe("Usuario creado exitosamente"),
-          400: z
-            .object({ message: z.string() })
-            .describe("Error de validación"),
+          400: validationErrorSchema,
           409: z
             .object({ message: z.string() })
-            .describe("El usuario ya existe"),
+            .describe("Conflicto: El nombre de usuario o correo ya existen"),
           500: z
             .object({ message: z.string() })
             .describe("Error interno del servidor"),
@@ -47,12 +47,12 @@ export const userRoutes: FastifyPluginAsync = async (fastify) => {
           200: z
             .object({ token: z.string() })
             .describe("Autenticación exitosa"),
-          400: z
-            .object({ message: z.string() })
-            .describe("Error de validación"),
+          400: validationErrorSchema,
           401: z
             .object({ message: z.string() })
-            .describe("Credenciales inválidas"),
+            .describe(
+              "Credenciales inválidas (Usuario no encontrado o contraseña incorrecta)",
+            ),
           500: z
             .object({ message: z.string() })
             .describe("Error interno del servidor"),

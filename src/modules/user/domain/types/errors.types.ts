@@ -1,3 +1,8 @@
+export type EmailAlreadyExistsError = {
+  kind: "EMAIL_ALREADY_EXISTS";
+  message: string;
+};
+
 export type UserAlreadyExistsError = {
   kind: "USER_ALREADY_EXISTS";
   message: string;

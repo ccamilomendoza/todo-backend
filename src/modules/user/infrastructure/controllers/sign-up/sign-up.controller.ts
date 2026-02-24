@@ -2,7 +2,7 @@ import type { RouteHandler } from "fastify";
 import type { z } from "zod/v4";
 import { signUpUserUseCase } from "../../../application/use-cases/sign-up/sign-up.uc";
 import {
-  getUserByUsernameRepository,
+  checkUserExistsRepository,
   signUpUserRepository,
 } from "../../data-base/user.db";
 import type { signUpUserSchema } from "../../schemas/user.schema";
@@ -16,7 +16,7 @@ export const signUpController: RouteHandler<{
 
   try {
     const result = await signUpUserUseCase({
-      getUserByUsernameRepository,
+      checkUserExistsRepository,
       hashService,
       signUpUserRepository,
     })(userData);

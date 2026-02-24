@@ -1,8 +1,14 @@
 import type {
+  EmailAlreadyExistsError,
   UserAlreadyExistsError,
   UserNotFoundError,
   WrongPasswordError,
-} from "../../types/user.types";
+} from "../../types/errors.types";
+
+export const emailAlreadyExists = (email: string): EmailAlreadyExistsError => ({
+  kind: "EMAIL_ALREADY_EXISTS",
+  message: `User with email "${email}" already exists`,
+});
 
 export const userAlreadyExists = (
   username: string,
