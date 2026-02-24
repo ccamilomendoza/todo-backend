@@ -45,8 +45,9 @@ export const signInUserUseCase =
     if (!isValidPassword) return fail(wrongPassword(credentials.username));
 
     const token = generateTokenService({
-      username: user.username,
       email: user.email,
+      id: user.id,
+      username: user.username,
     });
 
     return ok({ token });
