@@ -22,3 +22,12 @@ export type GetUserByUsernameRepository = (
 export type SignInUserRepository = (
   user: UserCredentialsPayload,
 ) => Promise<UserEntity>;
+
+interface UpdateAvatarRepositoryArgs {
+  avatarUrl: string;
+  userId: string;
+}
+
+export type UpdateAvatarRepository = (
+  args: UpdateAvatarRepositoryArgs,
+) => Promise<void>;

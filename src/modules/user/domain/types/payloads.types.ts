@@ -4,6 +4,10 @@ export interface AuthResponsePayload {
   token: string;
 }
 
+export interface UploadAvatarResponsePayload {
+  avatarUrl: string;
+}
+
 export type CreateUserPayload = Omit<
   UserEntity,
   "createdAt" | "id" | "isActive" | "updatedAt"

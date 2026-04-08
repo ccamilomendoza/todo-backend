@@ -1,5 +1,5 @@
 export interface UserEntity {
-  avatar: string;
+  avatar: string | null;
   createdAt: Date;
   email: string;
   firstName: string;

@@ -4,10 +4,36 @@ import { z } from "zod";
 import { validationErrorSchema } from "../../../shared/infrastructure/schemas/validation.schema";
 import { signInController } from "../controllers/sign-in/sign-in.controller";
 import { signUpController } from "../controllers/sign-up/sign-up.controller";
+import { updateAvatarController } from "../controllers/update-avatar/update-avatar.controller";
 import { signInUserSchema, signUpUserSchema } from "../schemas/user.schema";
 
 export const userRoutes: FastifyPluginAsync = async (fastify) => {
   const typedFastify = fastify.withTypeProvider<ZodTypeProvider>();
+
+  typedFastify.patch(
+    "/user/avatar",
+    {
+      schema: {
+        tags: ["User"],
+        summary: "Actualizar Avatar",
+        description:
+          "Sube una imagen para actualizar el avatar del usuario. Requiere Header Authorization.",
+        security: [{ bearerAuth: [] }],
+        consumes: ["multipart/form-data"],
+        response: {
+          200: z
+            .object({ avatarUrl: z.string() })
+            .describe("Avatar subido exitosamente"),
+          400: z
+            .object({ message: z.string() })
+            .describe("Error en la solicitud"),
+          401: z.object({ message: z.string() }).describe("No autorizado"),
+          500: z.object({ message: z.string() }).describe("Error interno"),
+        },
+      },
+    },
+    updateAvatarController,
+  );
 
   typedFastify.post(
     "/user",

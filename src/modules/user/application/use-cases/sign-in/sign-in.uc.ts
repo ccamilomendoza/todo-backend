@@ -1,4 +1,5 @@
 import { fail, ok } from "../../../../shared/domain/rules/result/result.rules";
+import type { GenerateTokenService } from "../../../../shared/domain/services/token.service";
 import type { Result } from "../../../../shared/domain/types/result.type";
 import type { GetUserByUsernameRepository } from "../../../domain/repositories/user.repository";
 import {
@@ -6,7 +7,6 @@ import {
   wrongPassword,
 } from "../../../domain/rules/errors/errors.rules";
 import type { CompareHashService } from "../../../domain/services/hash.service";
-import type { GenerateTokenService } from "../../../domain/services/token.service";
 import type {
   UserNotFoundError,
   WrongPasswordError,

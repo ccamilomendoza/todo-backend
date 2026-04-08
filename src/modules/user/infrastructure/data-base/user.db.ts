@@ -5,6 +5,7 @@ import type {
   CheckUserExistsRepository,
   GetUserByUsernameRepository,
   SignUpUserRepository,
+  UpdateAvatarRepository,
 } from "../../domain/repositories/user.repository";
 
 export const checkUserExistsRepository: CheckUserExistsRepository = async ({
@@ -41,4 +42,16 @@ export const signUpUserRepository: SignUpUserRepository = async (userData) => {
     ...userData,
     updatedAt: sql`NOW()`,
   });
+};
+
+export const updateUserAvatarRepository: UpdateAvatarRepository = async ({
+  avatarUrl,
+  userId,
+}) => {
+  await db
+    .update(userTable)
+    .set({
+      avatar: avatarUrl,
+    })
+    .where(eq(userTable.id, userId));
 };

@@ -1,0 +1,20 @@
+{
+  "version": 1,
+  "skills": {
+    "api-design": {
+      "source": "supercent-io/skills-template",
+      "sourceType": "github",
+      "computedHash": "30ba2419b18643073649dd8eccb9a845f8907751b7c8d6f77e29f014baf628e2"
+    },
+    "fastify-best-practices": {
+      "source": "mcollina/skills",
+      "sourceType": "github",
+      "computedHash": "a1a53d8c470c350e7d711ccfb720c0cce5984c49852f24bcfcf8b119daa67538"
+    },
+    "postgres": {
+      "source": "planetscale/database-skills",
+      "sourceType": "github",
+      "computedHash": "f0632544d951152bf28c4f5cbb02593af296a3abe75f8949d003718c61a9a90b"
+    }
+  }
+}
