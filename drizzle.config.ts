@@ -1,5 +1,3 @@
-/** biome-ignore-all lint/style/noNonNullAssertion: The DATABASE_URL must be defined */
-
 import "dotenv/config";
 import { defineConfig } from "drizzle-kit";
 
